@@ -6,18 +6,24 @@
 Welcome to Reltrans's documentation!
 ====================================
 
-Welcome to the Reltrans documentation! This is currently WiP.
+Welcome to the Reltrans documentation! 
 
+Reltrans is a semi-analytical model for X-ray reverberation mapping of accreting black holes. 
+
+Features
+--------
+
+Reporting issues
+----------------
+
+
+Documentation contents
+======================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+Citing Reltrans
+===============
