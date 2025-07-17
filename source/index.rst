@@ -6,8 +6,7 @@
 Welcome to Reltrans's documentation!
 ====================================
 
-This model is amazing and much better than the JEDSAD
-haha I made Greg review a TCAF paper im so funny
+Welcome to the Reltrans documentation! This is currently WiP.
 
 
 .. toctree::
