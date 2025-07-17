@@ -12,6 +12,8 @@ Welcome to the Reltrans documentation! This is currently WiP.
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   
+   model_flavours
 
 
 
