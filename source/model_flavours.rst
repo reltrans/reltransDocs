@@ -345,41 +345,29 @@ reltransDbl is identical to reltransDCP except that it assumes that there are
 |                        |            |reference                    |
 |                        |            |band                         |
 +------------------------+------------+-----------------------------+
-| 22                     | phiAB      |phase                        |
-|                        |            |difference                   |
-|                        |            |between the                  |
-|                        |            |pivoting and                 |
-|                        |            |normalisation                |
-|                        |            |of the                       |
-|                        |            |illuminating                 |
-|                        |            |variability                  |
+| 22                     | phiAB      |phase difference             |
+|                        |            |between the pivoting and     |
+|                        |            |normalisation of the         |
+|                        |            |illuminating variability     |
+|                        |            |for the bottom lamppost      |
 +------------------------+------------+-----------------------------+
-| 23                     | g          |ratio of the                 |
-|                        |            |normalisation                |
-|                        |            |between the                  |
-|                        |            |pivoting and                 |
-|                        |            |normalisation                |
-|                        |            |of the                       |
-|                        |            |illuminating                 |
-|                        |            |variability                  |
+| 23                     | g          |ratio of the normalisation   |
+|                        |            |between the pivoting and     |
+|                        |            |normalisation of the         |
+|                        |            |illuminating variability     |
+|                        |            |of the bottom lamppost       |
 +------------------------+------------+-----------------------------+
-| 22                     | phiAB2     |phase                        |
-|                        |            |difference                   |
-|                        |            |between the                  |
-|                        |            |pivoting and                 |
-|                        |            |normalisation                |
-|                        |            |of the                       |
-|                        |            |illuminating                 |
-|                        |            |variability                  |
+| 22                     | phiAB2     |phase difference             |
+|                        |            |between the pivoting and     |
+|                        |            |normalisation of the         |
+|                        |            |illuminating variability     |
+|                        |            |for the top lampost          |
 +------------------------+------------+-----------------------------+
-| 23                     | g2         |ratio of the                 |
-|                        |            |normalisation                |
-|                        |            |between the                  |
-|                        |            |pivoting and                 |
-|                        |            |normalisation                |
-|                        |            |of the                       |
-|                        |            |illuminating                 |
-|                        |            |variability                  |
+| 23                     | g2         |ratio of the normalisation   |
+|                        |            |between the pivoting and     |
+|                        |            |normalisation of the         |
+|                        |            |illuminating variability     |
+|                        |            |of the top lamppost          |
 +------------------------+------------+-----------------------------+
 | 23                     | alpha      |Cross-spectral               |
 |                        |            |normalisation                |
