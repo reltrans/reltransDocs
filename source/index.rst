@@ -26,8 +26,7 @@ Documentation contents
 ======================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
    
    model_flavours
 
