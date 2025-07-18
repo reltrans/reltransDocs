@@ -61,9 +61,9 @@ The steps to install configure and the model are the following:
     
     lmod reltrans /path/to/reltrans/
 
-or if you're using Mac, type:
+ or if you're using Mac, type:
 
-.. code-block:: tcl
+ .. code-block:: tcl
     
     load /path/to/reltrans/libreltrans.dylib
 
