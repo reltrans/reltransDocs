@@ -1,6 +1,11 @@
+Reltrans model setup
 ========================
+
+This section includes multiple notes on how to set up and run the model, and on 
+the different assumptions that each model flavour makes
+
 Reltrans model flavours
-========================
+-----------------------
 
 **Reltrans** is not just a single model, but is a library of different model
 flavours that have slightly different physics. This page lists all the 
@@ -12,9 +17,9 @@ parameters.
     is under development.
     
 
-=========================
 Environmental variables
-=========================
+-----------------------
+
 There are a number of environmental variables that are set across all model 
 flavours of reltrans. These relate both to the physics of the model, but also
 makes model calling faster in some cases.
@@ -50,22 +55,18 @@ If environment variables are not set, the model uses default parameters.
   If the two variables are not set the code will ask for the path: "Enter name 
   the response file (with full path)"
 
-============================
 Models
-============================
+------
 
-------------
 reltransDCp
-------------
+^^^^^^^^^^^
 
 reltransDCp can be considered the "default" version of the lastest reltrans 
 release. It assumes that the disk is illuminated by a nthcomp spectrum and the
 disk is a variable density disk with a fixed high energy cutoff at 300keV. This
 means that it used the xillverDCp tables.
 
-^^^^^^^^^^^^^
-Parameters
-^^^^^^^^^^^^^
+**Parameters:**
 
 +------------------------+------------+-------------+
 | Parameter number       | Name       | Description |
@@ -151,17 +152,16 @@ Parameters
 |                        |            |used         |
 +------------------------+------------+-------------+
 
-------------
+
 reltransPL
-------------
+^^^^^^^^^^^
 
 reltransPL is identical to reltransDCP except that it assumes that the disk is 
 illuminated by a powerlaw spectrum. This means that it used the xillverDCp 
 tables.
 
-^^^^^^^^^^^^^
-Parameters
-^^^^^^^^^^^^^
+**Parameters:**
+
 
 +------------------------+------------+-------------+
 | Parameter number       | Name       | Description |
