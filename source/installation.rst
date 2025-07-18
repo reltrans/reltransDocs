@@ -55,11 +55,17 @@ The steps to install configure and the model are the following:
 
 * Running the model: 
 
- Within Xspec type:
+ Within Xspec, if using Ubuntu, type:
  
  .. code-block:: tcl
     
-    lmod reltrans /path/to/reltrans/installation
+    lmod reltrans /path/to/reltrans/
+
+or if you're using Mac, type:
+
+.. code-block:: tcl
+    
+    load /path/to/reltrans/libreltrans.dylib
 
  You will now be be able to call the model identically to any other additive
  model in Xspec.
