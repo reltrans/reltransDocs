@@ -8,7 +8,7 @@ Welcome to Reltrans's documentation!
 
 Welcome to the Reltrans documentation! 
 
-Reltrans is a publicly available, semi-analytical model for X-ray reverberation mapping of accreting black holes in both AGN and X-ray binaries. It can be used to compute both time-averaged spectra and energy-dependent, Fourier domain cross spectra. In order to perform relativistic ray-tracing, Reltrans assumes the lamp-post model for the coronal geoemtry, with some potential tweaks depending on the model flavour. For example, it is possible to include a second lamp-post self consistently, or to modify the angular dependence of the source emissivity. More information on the model flavours can be found here: WiP link.
+Reltrans is a publicly available, semi-analytical model for X-ray reverberation mapping of accreting black holes in both AGN and X-ray binaries. It can be used to compute both time-averaged spectra and energy-dependent, Fourier domain cross spectra. In order to perform relativistic ray-tracing, Reltrans assumes the lamp-post model for the coronal geoemtry, with some potential tweaks depending on the model flavour. For example, it is possible to include a second lamp-post self consistently, or to modify the angular dependence of the source emissivity. 
 
 Features
 --------
@@ -28,6 +28,7 @@ Documentation contents
 .. toctree::
    :maxdepth: 1
    
+   installation 
    model_flavours
 
 Citing Reltrans
