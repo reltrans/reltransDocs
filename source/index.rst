@@ -26,6 +26,9 @@ Documentation contents
 ======================
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+   
    model_flavours
 
 Citing Reltrans
@@ -133,7 +136,6 @@ Additionally, if you use the RTDist flavour we ask that you also cite:
             document.body.removeChild(el);       
         }
     </script>
-
 
     <ul>
         <li>Ingram et al., 2022 MNRAS, 509, 619
