@@ -73,26 +73,34 @@ makes model calling faster in some cases.
 
 If environment variables are not set, the model uses default parameters. 
 
-* ION_ZONES [integer > 0; default 20]\: It sets the number of radial zones of
+* ION_ZONES [integer > 0; default 20]\: 
+
+  It sets the number of radial zones of
   the disk to calculate the ionisation profile of the disk. The default value is
   50 zones, but the number used in previous works of the reltrans team is 20. If
   it is set to 1 the disk is considered to have the same ionisation and the same
   density everywhere. 
 
-* A_DENSITY [possible options 0 or 1; default 0]: It sets the type to density 
+* A_DENSITY [possible options 0 or 1; default 0]: 
+
+  It sets the type to density 
   profile in the disk. There are two options: 
+  
   * A_DENSITY = 0 -> constant density
-  * A_DENSITY = 1 -> Shakura&Suniev zone A density profile. 
+  * A_DENSITY = 1 -> Shakura & Suniev zone A density profile. 
+  
   Keep in mind that if you set the ION_ZONES = 1, it doesn't matter which 
   density profile you choose because you have a single radial zone disk.
 
 * MU_ZONES [integer > 0; default 5 ]: 
+
   it sets the zones for the emitting angle (they are different from the radial 
   zones). In previous work we noticed that the angle dependence does not change 
   dramatically the spectrum, thus we have used MU_ZONES set to 1 to speed up the 
   code. 
 
 * RELTRANS_TABLES [character string, NO default]:
+
   sets the path to where the Xillver tables to be used in the model are. 
 
 .. note:: 
@@ -100,6 +108,7 @@ If environment variables are not set, the model uses default parameters.
    configuration file, NOT the tables that come directly from the website.  
 
 * RMF_SET and ARF_SET [character string; NO default]:  
+
   they pre-set the path of the response matrix and the arf. 
   This is not necessary if you are interested in the time-averaged energy 
   spectrum since Xspec applies the response matrix automatically. 
@@ -113,6 +122,7 @@ If environment variables are not set, the model uses default parameters.
   second set of responses by additionally setting the RMF_SET2 and ARF_SET2.
 
 * EMIN_REF and EMAX_REF [numbers > 0, NO default]:
+
   the minimum and maximum energies used to define the reference band used when 
   calculating the model cross spectrum.
   If users are modelling cross spectra from two different instruments (for  
@@ -120,14 +130,19 @@ If environment variables are not set, the model uses default parameters.
   the second instrument by additionally setting EMIN_REF2 and EMAX_REF2. 
 
 * REV_VERB [integer > 0, default 0]:
+
   A verbosity switch to print information to terminal every time the model is 
   run. Set to 0 during fits to avoid cluttering the terminal. 
   
-* BACKSCL [number > 0, default 1]: used to re-scale the background when running 
+* BACKSCL [number > 0, default 1]: 
+
+  used to re-scale the background when running 
   the simulation model flavours; it is identical to the BACKSCL parameter in the 
   Xspec fakeit routine.   
 
-* SEED_SIML [number > 0, NO default]: the seed used to initialize the random 
+* SEED_SIML [number > 0, NO default]: 
+
+  the seed used to initialize the random 
   number generator for the simulator model flavours. 
 
   
