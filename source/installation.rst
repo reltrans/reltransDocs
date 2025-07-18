@@ -45,7 +45,7 @@ uses to differentiate model flavours:
 
 .. code-block:: python
 
-    mport ctypes as ct
+    import ctypes as ct
     import os.path
     import numpy as np
 
