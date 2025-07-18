@@ -7,109 +7,62 @@ Requirements
 Reltrans requires users to have a functioning HEASOFT installation, a saved 
 version of the `Xillver tables <https://sites.srl.caltech.edu/~javier/xillver/>`_,
 and a Python3 installation including `numpy <https://numpy.org/>`_ and 
-`astropy <https://www.astropy.org/>`_.
+`astropy <https://www.astropy.org/>`_. In particular, the Xillver tables you 
+need to have are ``xillverCp_v3.4.fits`` and ``xillver-a-Ec5.fits``.
 
 Configuration and installation
 ------------------------------
 
-In order to install the model, you need to run two separate steps. First, run 
-the configuration script ``configure.sh`` (by running ``./config.sh`` in your 
-terminal). This script will install the fftw3 package to compute Fourier 
-transforms, and additionally it will open the appropriate Xillver tables and 
-renormalize them in order to work correctly with Reltrans. This operation willhttps://numpy.org/doc/stable/f2py/
-create new fits files for the re-normalised tables, which will take up several 
-gb of space on your hard drive. Depending on the paths and operative system of 
-your machine, this step might require you to use the ``sudo`` command. 
+The steps to install configure and the model are the following:
 
-After running the configuration script, you can compile the code within Xspec 
-with two separate scripts, depending on your operative system: 
-``compile_xspec_mac.sh`` and ``compile_xspec_linux.sh`` in the command line. 
-These commands will result in a library file being produced in the Reltrans
-folder: ``libreltrans.so`` (on Linux) or ``libreltrans.dylib`` (on Mac). These 
-libraries can then be loaded in any Xspec session with the command 
-``lmod reltrans /path/to/reltrans/installation``. You will then be be able to 
-call the model identically to any other additive model in Xspec.
-
-Running the model outside of Xspec
-----------------------------------
-
-It is also possible to run the model outside of Xspec, using a Python wrapper 
-included in the repository (``f2py_interface.py``). The wrapper uses f2py 
-(``https://numpy.org/doc/stable/f2py/``) to call the Reltrans Fortran functions
-directly in Python, by passing the need to e.g. interface with PyXspec. 
-
-The wrapper works as follows: it imports the compiled library file that 
-is created by the bash scripts, defines the appopriate C-types to interface 
-Python and C/Fortran arrays, and then defines the wrapper functions that Xspec 
-uses to differentiate model flavours:
-
-.. code-block:: python
-
-    import ctypes as ct
-    import os.path
-    import numpy as np
-
-    # prepare a few pointer types for fortran
-    type_double_p = ct.POINTER(ct.c_double)
-    type_float_p = ct.POINTER(ct.c_float)
-    type_int_p    = ct.POINTER(ct.c_int)
-
-
-    #load the compiled library file 
-    lib = ct.cdll.LoadLibrary(os.path.dirname(__file__) + "/lib_reltrans.so")
+* Define the path to the Xillver tables:
+ 
+ .. code-block:: bash
     
-    #define the function we want to call, and the types of its arguments
-    #this is the standard Xspec model function input: 
-    #an energy array (ear), its size (ne), the model parameters (param), the 
-    #ifl spectrum flag, and the output spectrum (photar)   
-    wDCp = lib.tdreltransdcp_
-    wDCp.argtypes = [type_float_p, type_int_p, type_float_p, type_int_p, type_float_p]
-    wDCp.restype  = None
+    export RELTRANS_TABLES="path/to/Xillver/tables"
+ 
+ This step defines an environment variable for the configuration file below to 
+ find the Xillver tables. 
+ 
+* Run the configuration script:
 
-    #define a generic wrapper for all the possible model flavour wrappers 
-    def gen_wrap(ear, params, func):
-        '''
-        Takes:
+ .. code-block:: bash
+    
+    ./configure.sh
 
-        ear   : numpy array of energies
-        params: array of parameters (double)
+ This script will install the fftw3 package to compute Fourier transforms, and
+ additionally it will open the appropriate Xillver tables and renormalize them 
+ in order to work correctly with Reltrans. This operation will create new fits 
+ files for the re-normalised tables, which will take up several GB of space on 
+ your hard drive. Depending on the paths and operative system of your machine, 
+ this step might require you to use the ``sudo`` command. 
 
-        Returns:
+* Run the appropriate  compilation script for your operative system:
 
-        photar: numpy.array (double)
-        '''
+ .. code-block:: bash
+    
+    ./compile_xspec_linux.sh
+    
+ or 
 
-        # to be extra sure you could put the following
-        # but it could slow down the code
-        #
-        # ear    = numpy.array(ear)
-        # params = numpy.array(params)
+ .. code-block:: bash
+  
+    ./compile_xspec_mac.sh
+    
+ This will compile the code within Xspec and result in a library file being 
+ produced in the Reltrans folder: ``libreltrans.so`` (on Linux) or 
+ ``libreltrans.dylib`` (on Mac). 
 
-        ne = len(ear) - 1
+* Running the model: 
 
-        photar = np.zeros(ne, dtype = np.float32)
+ Within Xspec type:
+ 
+ .. code-block:: tcl
+    
+    lmod reltrans /path/to/reltrans/installation
 
-        func(ear.ctypes.data_as(type_float_p),
-                   ct.byref(ct.c_int(ne)),
-                   params.ctypes.data_as(type_float_p),
-                   ct.byref(ct.c_int(1)),
-                   photar.ctypes.data_as(type_float_p))
-
-        return photar
-        
-    #define the function that we will use to call reltransDCp through the 
-    #generic wrapper 
-    def reltransDCp(ear, params):
-        return gen_wrap(ear, params, wDCp)
-
-.. note:: 
-    The code above reads a library called lib_reltrans.so. This is because on 
-    some systems, the files produced by the Xspec compilation (libreltrans.so or 
-    libreltrans.dylib) may not play nicely with the f2py interface. If this is 
-    the case, we provide a makefile that is entirely independent of Xspec, and 
-    which can be used to produce the lib_reltrans.so library file by calling 
-    ``make revmakefile lib`` in the terminal. 
-
+ You will now be be able to call the model identically to any other additive
+ model in Xspec.
 
 Environmental variables
 -----------------------
@@ -198,3 +151,83 @@ repository (``example_set_reltrans_env``). If you want to use this file to
 initialize the enviornment variables, edit the paths to the instrument responses 
 you're interested in to set RMF\_SET and ARF\_SET correctly, and then simply 
 source the file in your terminal.
+
+Running the model outside of Xspec
+----------------------------------
+
+It is also possible to run the model outside of Xspec, using a Python wrapper 
+included in the repository (``f2py_interface.py``). The wrapper uses f2py 
+(``https://numpy.org/doc/stable/f2py/``) to call the Reltrans Fortran functions
+directly in Python, by passing the need to e.g. interface with PyXspec. 
+
+The wrapper works as follows: it imports the compiled library file that 
+is created by the bash scripts, defines the appopriate C-types to interface 
+Python and C/Fortran arrays, and then defines the wrapper functions that Xspec 
+uses to differentiate model flavours:
+
+.. code-block:: python
+
+    import ctypes as ct
+    import os.path
+    import numpy as np
+
+    # prepare a few pointer types for fortran
+    type_double_p = ct.POINTER(ct.c_double)
+    type_float_p = ct.POINTER(ct.c_float)
+    type_int_p    = ct.POINTER(ct.c_int)
+
+
+    #load the compiled library file 
+    lib = ct.cdll.LoadLibrary(os.path.dirname(__file__) + "/lib_reltrans.so")
+    
+    #define the function we want to call, and the types of its arguments
+    #this is the standard Xspec model function input: 
+    #an energy array (ear), its size (ne), the model parameters (param), the 
+    #ifl spectrum flag, and the output spectrum (photar)   
+    wDCp = lib.tdreltransdcp_
+    wDCp.argtypes = [type_float_p, type_int_p, type_float_p, type_int_p, type_float_p]
+    wDCp.restype  = None
+
+    #define a generic wrapper for all the possible model flavour wrappers 
+    def gen_wrap(ear, params, func):
+        '''
+        Takes:
+
+        ear   : numpy array of energies
+        params: array of parameters (double)
+
+        Returns:
+
+        photar: numpy.array (double)
+        '''
+
+        # to be extra sure you could put the following
+        # but it could slow down the code
+        #
+        # ear    = numpy.array(ear)
+        # params = numpy.array(params)
+
+        ne = len(ear) - 1
+
+        photar = np.zeros(ne, dtype = np.float32)
+
+        func(ear.ctypes.data_as(type_float_p),
+                   ct.byref(ct.c_int(ne)),
+                   params.ctypes.data_as(type_float_p),
+                   ct.byref(ct.c_int(1)),
+                   photar.ctypes.data_as(type_float_p))
+
+        return photar
+        
+    #define the function that we will use to call reltransDCp through the 
+    #generic wrapper 
+    def reltransDCp(ear, params):
+        return gen_wrap(ear, params, wDCp)
+
+.. note:: 
+    The code above reads a library called lib_reltrans.so. This is because on 
+    some systems, the files produced by the Xspec compilation (libreltrans.so or 
+    libreltrans.dylib) may not play nicely with the f2py interface. If this is 
+    the case, we provide a makefile that is entirely independent of Xspec, and 
+    which can be used to produce the lib_reltrans.so library file by calling 
+    ``make revmakefile lib`` in the terminal. 
