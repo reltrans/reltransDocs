@@ -359,8 +359,10 @@ rtdist
 ^^^^^^^^^^^
 
 rtdist is a variant of reltransDCp. It self-consistently calculates the disk
-ionisation by calculating the geometric reltationship between the observer,
-source of illuminating spectrum and the disk. It also features a change to
+ionisation by calculating the geometric relationship between the observer,
+source of illuminating spectrum and the disk, thus logxi is not a parameter 
+of this model flavour, since it has been replaced by the distance between 
+the observer and the source. It also features a change to
 the previous boost normalisation factor for the reflection spectrum. The 
 source is no longer assumed to be isotropic. Instead, the angular
 dependence is specified by the parameters b1, b2 and qboost (referred to as
