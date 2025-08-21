@@ -385,7 +385,7 @@ https://ui.adsabs.harvard.edu/abs/2022MNRAS.509..619I/abstract.
     then to xspec.
 
 .. note::
-    :math:`h/r > 0`` is currently not used in the calculation of mu_e and mu_i. 
+    :math:`h/r > 0` is currently not used in the calculation of mu_e and mu_i. 
     These are the cosines of the angles between the incident/emitted ray and 
     the z-axis, NOT the disc normal. This may have implications when inferring
     information about the geometry of the disk.
