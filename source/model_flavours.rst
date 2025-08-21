@@ -12,6 +12,24 @@ parameters.
     
 Models
 -------
+
+.. note::
+    reltrans is a library of spectral timing models which means that all variants
+    of the model include parameters related to which spectral timing product the 
+    model returns. These include:
+
+    * fmin and fmax: these two parameters define the frequency range of the 
+      cross-spectrum to be evaluated. Setting both of these values to 0 will
+      cause the model to always return the time-averaged spectrum.
+    * ReIm: this parameter flags the model to output different timing products
+      or components of the cross-spectrum. 
+        * 0: The time-averaged spectrum.
+        * 1: Real part of the cross spectrum.
+        * 2: Imaginary part of the cross spectrum.
+        * 3: Modulus of the cross spectrum.
+        * 4: Lag-energy spectrum.
+        * 5: Modulus of the folded cross spectrum.
+        * 6: Lag-energy spectrum calculated from the folded cross spectrum.
     
 reltransDCp
 ^^^^^^^^^^^
@@ -343,9 +361,36 @@ rtdist
 rtdist is a variant of reltransDCp. It self-consistently calculates the disk
 ionisation by calculating the geometric reltationship between the observer,
 source of illuminating spectrum and the disk. It also features a change to
-the previous boost normalisation factor for the reflection spectrum which is 
-changed to 2 emissivity parameters which directs the emission in a 
-manner that is more physical.
+the previous boost normalisation factor for the reflection spectrum. The 
+source is no longer assumed to be isotropic. Instead, the angular
+dependence is specified by the parameters b1, b2 and qboost (referred to as
+as boost but defined differently from other reltrans flavours). b1 and b2 are
+linear and quadratic coefficients of the :math:`\text{mu}= \cos(\theta)` dependence and qboost
+skews the relation where qboost = I(mu=-1)/I(mu=1). The disk scale height
+also has become a free parameter.
+
+For a comprehensive explanation of the model, please see the model paper:
+https://ui.adsabs.harvard.edu/abs/2022MNRAS.509..619I/abstract.
+
+.. note::
+    **IMPORTANT!**
+
+    If you are using rtdist in reltrans, the xspec norm parameter must be frozen
+    to 1 as Anorm replaces xspec norm's function.
+
+    * For the DC component, the xspec norm parameter must be frozen to norm=1.
+    * For the lag spectrum, the xspec norm parameter must (as usual) be frozen to
+      norm=1.
+    * For the Re/Im/amp spectra, the xspec norm becomes the average power in that
+      frequency range in squared fractional rms units (this is the case if the
+      data really is the cross-spectrum and not the complex covariance).
+
+    The reason for this is that Anorm is A0 from the RELTRANS 2.0 paper.
+    Previously, A0 was input as the norm parameter of the DC component. Now we
+    need A0 for all calls because we use it to calculate logxi(r). It is
+    therefore its own model parameter. The model therefore already multiplies
+    the DC component by Anorm and the AC components by Anorm^2  before sending
+    then to xspec.
 
 **Parameters:**
 
@@ -373,25 +418,26 @@ manner that is more physical.
 | 8                      | Dkpc       |Distance to  |
 |                        |            |source in kpc|
 +------------------------+------------+-------------+
-| 9                      | logxi      |ionisation   |
-+------------------------+------------+-------------+
-| 10                     | Afe        |iron         |
+| 9                      | Afe        |iron         |
 |                        |            |abundance    |
 +------------------------+------------+-------------+
-| 11                     | logNe      |disk density |
+| 10                     | logNe      |disk density |
 +------------------------+------------+-------------+
-| 12                     | kTe        |electron     |
+| 11                     | kTe        |electron     |
 |                        |            |temperature  |
 |                        |            |of the corona|
 +------------------------+------------+-------------+
-| 13                     | nH         |galactic     |
+| 12                     | nH         |galactic     |
 |                        |            |absorption   |
 +------------------------+------------+-------------+
-| 14                     | boost      |reflection   |
+| 13                     | boost      |reflection   |
 |                        |            |spectrum     |
 |                        |            |normalisation|
 +------------------------+------------+-------------+
-| 15                     | Mass       |mass of the  |
+| 14                     | honr       |scale height |
+|                        |            |of the disk  |
++------------------------+------------+-------------+
+| 14                     | Mass       |mass of the  |
 |                        |            |black hole   |
 +------------------------+------------+-------------+
 | 16                     | b1         |emissivity   |
