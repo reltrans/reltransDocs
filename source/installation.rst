@@ -1,6 +1,5 @@
 Installation and setup instructions
 ===================================
-
 Requirements
 ------------ 
 
@@ -69,6 +68,8 @@ The steps to install configure and the model are the following:
 
  You will now be be able to call the model identically to any other additive
  model in Xspec.
+
+.. _environmentvars:
 
 Environmental variables
 -----------------------
