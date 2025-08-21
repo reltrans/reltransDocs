@@ -368,8 +368,8 @@ source is no longer assumed to be isotropic. Instead, the angular
 dependence is specified by the parameters b1, b2 and qboost (referred to as
 as boost but defined differently from other reltrans flavours). b1 and b2 are
 linear and quadratic coefficients of the :math:`\text{mu}= \cos(\theta)` dependence and qboost
-skews the relation where qboost = I(mu=-1)/I(mu=1). The disk scale height
-also has become a free parameter.
+skews the relation where :math:`qboost = \frac{I(\text{mu}=-1)}{I(\text{mu}=1)}`. 
+The disk scale height also has become a free parameter.
 
 For a comprehensive explanation of the model, please see the model paper:
 https://ui.adsabs.harvard.edu/abs/2022MNRAS.509..619I/abstract.
@@ -500,8 +500,9 @@ Simulators
 We also include a number of simulators for the different reltrans model
 flavours. These are explicitly for simulating the timing products that reltrans
 computes. This results in additional coherence, rms variability and time
-exposure parameters. See :ref: 'environment'. There is no simulator for the 
-reltransPL.
+exposure parameters. See :ref:`environmentvars` for additional parameters 
+pertaining to the simulation such as seeding the simulation. There is no 
+simulator for the reltransPL.
 
 simrelt
 ^^^^^^^
