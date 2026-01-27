@@ -51,6 +51,11 @@ Clone the source code repository and run ``make``:
     cd reltrans
     make
 
+.. note::
+   The makefile assumes you are compiling with ``gfortran``. If you use a
+   different Fortran compiler, you can overwrite which compiler is used with
+   ``make FC=my-fortran-compiler``.
+
 This will compile Reltrans as a shared library into the ``build/lib``
 directory. If you are using Reltrans in XSPEC, use the ``xspec`` target:
 
@@ -67,6 +72,26 @@ Reltrans in XSPEC to ``build/xspec``. It may then be loaded into XSPEC with
 
 You will now be be able to call the model identically to any other additive
 model in Xspec.
+
+Debugging
+---------
+
+To compile Reltrans for debugging, use:
+
+ .. code-block:: bash
+
+    make DEBUG=1
+
+which will compile the library with debug symbols and without compiler
+optimisations. There is a small C command line interface for Reltrans which you
+can use as the entry point to easily attach a debugger (see ``utils/cli.c``).
+This can be built with:
+
+ .. code-block:: bash
+
+    make DEBUG=1 exe
+
+See the Makefile for more details.
 
 .. _environmentvars:
 
