@@ -15,8 +15,8 @@ The following are required:
 
 * (Normalised) `XILLVER tables <https://sites.srl.caltech.edu/~javier/xillver/>`_.
 
-  In particular, ``xillverCp_v3.4.fits``, ``xilverD-5.fits`` and
-  ``xilver-a-Ec5.fits``. These can either be normalised yourself using a
+  In particular, ``xillverCp_v3.4.fits`` and ``xilver-a-Ec5.fits``.
+  These can either be normalised yourself using a
   provided script (detailed below), or you can use the pre-normalised tables
   from `our test suite
   <https://github.com/reltrans/model-data/releases/latest>`_ (Note: these are
