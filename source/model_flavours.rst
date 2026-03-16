@@ -432,11 +432,11 @@ https://ui.adsabs.harvard.edu/abs/2022MNRAS.509..619I/abstract.
 |                        |            |spectrum     |
 |                        |            |normalisation|
 +------------------------+------------+-------------+
-| 14                     | honr       |scale height |
-|                        |            |of the disk  |
-+------------------------+------------+-------------+
 | 14                     | Mass       |mass of the  |
 |                        |            |black hole   |
++------------------------+------------+-------------+
+| 15                     | honr       |scale height |
+|                        |            |of the disk  |
 +------------------------+------------+-------------+
 | 16                     | b1         |emissivity   |
 |                        |            |parameter    |
