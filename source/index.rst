@@ -28,6 +28,7 @@ Documentation contents
 .. toctree::
    :maxdepth: 1
    
+   self
    installation 
    model_flavours
 
